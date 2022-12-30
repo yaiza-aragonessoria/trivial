@@ -1,0 +1,83 @@
+.results-container {
+    border-radius: 30px;
+    border: #4D6CFA 2px solid;
+    width: 350px;
+    height: 510px;
+    margin: 10% auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-around;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 14pt;
+    color: white;
+    background-color: #4D6CFA;
+
+
+}
+
+.your-score-title {
+    width: 350px;
+    text-align: center;
+    color: #FFCE80;
+    font-weight: bold;
+    font-size: x-large;
+    letter-spacing: 2px;
+    border-top-left-radius: 26px;
+    border-top-right-radius: 26px;
+}
+
+.score {
+    font-weight: bold;
+    padding: 15px;
+    color: white;
+    font-size: xx-large;
+}
+
+.message {
+    width: 300px;
+    margin: 20%;
+}
+
+.more-details-button {
+    background-color: #FFCE80;
+    color: #4D6CFA;
+    border-radius: 100px;
+    border: none;
+    width: max-content;
+    padding: 5px 50px;
+    font-weight: bold;
+}
+
+.more-details-button:hover {
+    color: #FFCE80;
+    background-color: #4D6CFA;
+}
+
+.answers {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    column-gap: 10px;
+    text-align: center;
+    width: 350px;
+    margin: 10% auto;
+    border-radius: 30px;
+    border: #4D6CFA 2px solid;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: 11pt;
+
+}
+
+.title-answers {
+    font-weight: bold;
+    margin: 10px;
+}
+
+.my-answers, .correct-answers {
+    display: grid;
+    grid-template-columns: 1fr;
+    align-items: center;
+    margin: 10px;
+}

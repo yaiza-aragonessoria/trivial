@@ -1,0 +1,13 @@
+.footer-ul, a {
+    display: flex;
+    /* border: green 1px solid; */
+    color: #4D6CFA;
+    align-items: center;
+    justify-content: space-around;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #FFCE80;
+}

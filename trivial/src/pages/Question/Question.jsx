@@ -1,8 +1,11 @@
 import { useDispatch, useSelector } from "react-redux";
-import { updateCurrQuestion } from "../../store/slices/questions";
+import { updateCurrQuestion } from "../../store/slices/questionsSlice";
 import { useNavigate } from 'react-router-dom'
-import { addAnswer } from "../../store/slices/answersSlice";
+import { addAnswer, addCorrectAnswer, countPoints } from "../../store/slices/answersSlice";
 import { useState, useMemo } from "react";
+import { v4 as uuid } from 'uuid';
+import "./Question.css";
+import Footer from "../../components/Footer/Footer";
 
 
 const Question = () => {
@@ -13,6 +16,7 @@ const Question = () => {
     const questionList = useSelector(state => state.questions.list);
     const navigate = useNavigate();
     const currQuestion = questionList[curr];
+
     
     const shuffle = (incorrect_answers, correct_answer) => {
         const rand = Math.floor(Math.random()*questionList.length);
@@ -23,43 +27,53 @@ const Question = () => {
     const handleOnChange = e => {        
         setSelectedAnswer(e.target.value);
     }
-    console.log(selectedAnswer)
 
     const handleNext = e => {
         e.preventDefault();
 
-        if (curr >= questionList.length -1) {
-            navigate("/results");
-        } else {
+        if(selectedAnswer !== undefined) {
             dispatch(updateCurrQuestion());
             dispatch(addAnswer(selectedAnswer));
+            dispatch(addCorrectAnswer(currQuestion.correct_answer));
+            dispatch(countPoints([selectedAnswer, currQuestion.correct_answer]));
         }
-    };
 
-    console.log("answers =", answers);
+        if (curr >= questionList.length -1) {
+            navigate("/results");
+        }         
+        
+    };
 
 
     return (
         <>
-            <div>
+        <div className="question-container">
+            <div className="question-title">
+                QUESTION {curr+1}
+            </div>
+            <form className="question-form" onSubmit={handleNext}>
+            <div className="question">
                 <p dangerouslySetInnerHTML={ { __html: questionList[curr].question } } />
             </div>
-            <form onSubmit={handleNext}>
-            {shuffledAnswers.map(answer => {
+            {shuffledAnswers.map((answer, index) => {
+                let id = uuid();
                 return (
                     <>
-                        <input type="radio" 
-                               id={answer} 
+                    <label htmlFor={id} className="answer-label">
+                        <input key={id} className="answer-input" type="radio"
                                name={`question-${curr}`} 
                                value={answer}
                                onChange={handleOnChange}
                                checked={selectedAnswer === answer}/>
-                        <label htmlFor={answer}>{answer}</label><br/>
+                        {answer}
+                    </label><br/>
                     </>
                 );})
             }
-            <input type="submit" value="Next"/>
+            <input className="next-button "type="submit" value="NEXT"/>
             </form>
+        </div>
+        < Footer />
         </>
         );
 };
